@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+dist
+node_modules
+.DS_Store
+.idea
+ncp-debug.log
+npm-debug.log
+API参考
+快速开始
+
