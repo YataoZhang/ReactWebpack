@@ -9,7 +9,9 @@ const vendors = [
     'react-router',
     "events",
     "flux",
-    "object-assign"
+    "object-assign",
+    'redux',
+    'react-redux'
 ];
 module.exports = {
     devtool: 'cheap-source-map',
