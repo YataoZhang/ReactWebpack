@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-build
+build/*
 node_modules
 .DS_Store
 .idea
@@ -7,4 +7,3 @@ ncp-debug.log
 npm-debug.log
 API参考
 快速开始
-
