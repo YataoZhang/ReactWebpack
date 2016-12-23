@@ -46,6 +46,7 @@ class AsycApp extends Component {
 
     render() {
         const {selectedSubreddit, posts, isFetching, lastUpdated}=this.props;
+        console.log(posts);
         return (
             <div>
                 <Picker value={selectedSubreddit} onChange={this.change} options={['reactjs','frontend']}/>

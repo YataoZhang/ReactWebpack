@@ -10,21 +10,21 @@ export function selectedSubreddit(state = 'reactjs', action) {
             return state;
     }
 }
-function posts(state = {isFetching: false, disInvalidate: false, items: []}, action) {
+function posts(state = {isFetching: false, didInvalidate: false, items: []}, action) {
     switch (action.type) {
         case  INVALIDATE_SUBREDDIT:
             return Object.assign({}, state, {
-                disInvalidate: true
+                didInvalidate: true
             });
         case REQUEST_POSTS:
             return Object.assign({}, state, {
                 isFetching: true,
-                disInvalidate: false
+                didInvalidate: false
             });
         case RECEIVE_POSTS:
             return Object.assign({}, state, {
                 isFetching: false,
-                disInvalidate: false,
+                didInvalidate: false,
                 items: action.posts,
                 lastUpdated: action.receivedAt
             });
@@ -38,7 +38,7 @@ export function postsBySubreddit(state = {}, action) {
         case RECEIVE_POSTS:
         case REQUEST_POSTS:
             return Object.assign({}, state, {
-                    [action.subreddit]: posts([state[action.subreddit]], action)
+                    [action.subreddit]: posts(state[action.subreddit], action)
                 }
             );
         default:

@@ -16,7 +16,8 @@ module.exports = {
     },
     output: {
         path: 'build',
-        filename: '[name].js'
+        filename: '[name].js',
+        pathinfo: true
     },
     module: {
         loaders: [

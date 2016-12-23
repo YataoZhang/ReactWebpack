@@ -4,20 +4,8 @@
 import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import Store from '../StateManager/Store';
-import Router from './router';
-
-const Root = (({store})=>(
-    <Provider store={store}>
-        <Router />
-    </Provider>
-));
-
-
-let store = Store();
-
+import Root from './router';
 ReactDOM.render(
-    <Root store={store}/>,
+    <Root />,
     document.getElementById('root')
 );
