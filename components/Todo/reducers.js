@@ -1,10 +1,10 @@
 /**
  * Created by zhangyatao on 2016/12/22.
  */
-import {combineReducers} from 'redux';
+
 import {ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters} from './actions';
 const {SHOW_ALL} = VisibilityFilters;
-function visibilityFilter(state = SHOW_ALL, action) {
+export function visibilityFilter(state = SHOW_ALL, action) {
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return action.filter;
@@ -12,7 +12,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
             return state;
     }
 }
-function todos(state = [], action) {
+export function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
             return [...state, {text: action.text, completed: false}];
@@ -28,8 +28,3 @@ function todos(state = [], action) {
             return state;
     }
 }
-const todoApp = combineReducers({
-    propTodos: todos,
-    propVisibilityFilter: visibilityFilter
-});
-export default todoApp;

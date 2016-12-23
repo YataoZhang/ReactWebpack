@@ -12,10 +12,10 @@ var definePlugin = new webpack.DefinePlugin({
 // webpack.config.js
 module.exports = {
     entry: {
-        app: './components/index.js'
+        app: './src/index.js'
     },
     output: {
-        path: 'dist',
+        path: 'build',
         filename: '[name].js'
     },
     module: {

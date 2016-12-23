@@ -22,6 +22,7 @@ class App extends Component {
     };
 
     render() {
+        // props就是store
         const {dispatch, childPropVisibleTodos, childPropVisibilityFilter} = this.props;
         return (
             <div>
@@ -45,6 +46,11 @@ function selectTodos(todos, filter) {
             return todos.filter(todo=>todo.completed !== false);
     }
 }
+/**
+ * 设置容器组件的props
+ * @param state store里面的数据
+ * @returns {{childPropVisibleTodos, childPropVisibilityFilter: visibilityFilter}}
+ */
 function select(state) {
     return {
         childPropVisibleTodos: selectTodos(state.propTodos, state.propVisibilityFilter),

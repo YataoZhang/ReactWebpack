@@ -2,21 +2,14 @@
  * Created by zhangyatao on 2016/12/21.
  */
 const webpack = require('webpack');
+var pagkages = require('./package.json');
+const vendors = Object.keys(pagkages.dependencies);
+
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const vendors = [
-    'react',
-    'react-dom',
-    'react-router',
-    "events",
-    "flux",
-    "object-assign",
-    'redux',
-    'react-redux'
-];
+
 module.exports = {
-    devtool: 'cheap-source-map',
     output: {
-        path: 'dist',
+        path: 'build',
         filename: '[name].js',
         library: '[name]_[chunkhash]'
     },
