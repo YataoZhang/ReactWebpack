@@ -32,7 +32,7 @@ function receivePosts(subreddit, json) {
         receivedAt: Date.now()
     }
 }
-export function fetchPosts(subreddit) {
+function fetchPosts(subreddit) {
     return function (dispatch) {
         dispatch(requestPosts(subreddit));
         return fetch(`http://www.subreddit.com/r/${subreddit}.json`)

@@ -13,12 +13,13 @@ export default class Picker extends Component {
 
     render() {
         const {value, onChange, options} = this.props;
+        console.log('options: ',options);
         return (
             <span>
                 <h1>{value}</h1>
                 <select onChange={e=>onChange(e.target.value)} value={value}>
                     {
-                        options.map(option=> <option value={options} key={options}>{option}</option>)
+                        options.map(option=> <option value={option} key={option}>{option}</option>)
                     }
                 </select>
             </span>

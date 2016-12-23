@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit} from '../actions';
+import {selectSubreddit, invalidateSubreddit, fetchPostsIfNeeded} from '../actions';
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
 class AsycApp extends Component {
@@ -23,10 +23,12 @@ class AsycApp extends Component {
 
     componentDidMount() {
         const {dispatch, selectedSubreddit} = this.props;
+        console.log('[componentDidMount] 在组件装载DOM后请求ajax;   dispatch(fetchPostsIfNeeded(selectedSubreddit)) \n\n');
         dispatch(fetchPostsIfNeeded(selectedSubreddit));
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('[componentWillReceiveProps] 组件更新props; nextProps:  ', nextProps, '  ;this.props:  ', this.props, ' \n\n');
         if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
             const {dispatch, selectedSubreddit}=nextProps;
             dispatch(fetchPostsIfNeeded(selectedSubreddit));
@@ -34,12 +36,14 @@ class AsycApp extends Component {
     }
 
     change(nextSubreddit) {
+        console.log('[change] nextSubreddit:  ', nextSubreddit);
         this.props.dispatch(selectSubreddit(nextSubreddit))
     }
 
     refreshClick(e) {
         e.preventDefault();
         const {dispatch, selectedSubreddit}=this.props;
+        console.log('[refreshClick]:  dispatch(invalidateSubreddit(selectedSubreddit));  dispatch(fetchPostsIfNeeded(selectedSubreddit)); \n\n');
         dispatch(invalidateSubreddit(selectedSubreddit));
         dispatch(fetchPostsIfNeeded(selectedSubreddit));
     }
@@ -79,6 +83,7 @@ class AsycApp extends Component {
     }
 }
 function mapStateToProps(state) {
+    console.log('[mapStateToProps] state:  ', state);
     const {selectedSubreddit, postsBySubreddit}=state;
     const {
         isFetching,
