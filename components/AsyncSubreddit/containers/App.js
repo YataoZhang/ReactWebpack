@@ -2,8 +2,10 @@
  * Created by zhangyatao on 2016/12/23.
  */
 import React, {Component, PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {selectSubreddit, invalidateSubreddit, fetchPostsIfNeeded} from '../actions';
+// import {selectSubreddit, invalidateSubreddit, fetchPostsIfNeeded} from '../actions';
+import * as Actions from '../actions';
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
 class AsycApp extends Component {
@@ -22,35 +24,35 @@ class AsycApp extends Component {
     }
 
     componentDidMount() {
-        const {dispatch, selectedSubreddit} = this.props;
+        const {fetchPostsIfNeeded, selectedSubreddit} = this.props;
         console.log('[componentDidMount] 在组件装载DOM后请求ajax;   dispatch(fetchPostsIfNeeded(selectedSubreddit)) \n\n');
-        dispatch(fetchPostsIfNeeded(selectedSubreddit));
+        fetchPostsIfNeeded(selectedSubreddit);
     }
 
     componentWillReceiveProps(nextProps) {
         console.log('[componentWillReceiveProps] 组件更新props; nextProps:  ', nextProps, '  ;this.props:  ', this.props, ' \n\n');
         if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
-            const {dispatch, selectedSubreddit}=nextProps;
-            dispatch(fetchPostsIfNeeded(selectedSubreddit));
+            const {fetchPostsIfNeeded, selectedSubreddit}=nextProps;
+            fetchPostsIfNeeded(selectedSubreddit);
         }
     }
 
     change(nextSubreddit) {
         console.log('[change] nextSubreddit:  ', nextSubreddit);
-        this.props.dispatch(selectSubreddit(nextSubreddit))
+        this.props.selectSubreddit(nextSubreddit);
     }
 
     refreshClick(e) {
         e.preventDefault();
-        const {dispatch, selectedSubreddit}=this.props;
+        const {invalidateSubreddit, fetchPostsIfNeeded, selectedSubreddit}=this.props;
         console.log('[refreshClick]:  dispatch(invalidateSubreddit(selectedSubreddit));  dispatch(fetchPostsIfNeeded(selectedSubreddit)); \n\n');
-        dispatch(invalidateSubreddit(selectedSubreddit));
-        dispatch(fetchPostsIfNeeded(selectedSubreddit));
+        invalidateSubreddit(selectedSubreddit);
+        fetchPostsIfNeeded(selectedSubreddit);
     }
 
     render() {
         const {selectedSubreddit, posts, isFetching, lastUpdated}=this.props;
-        console.log(posts);
+        console.log('render');
         return (
             <div>
                 <Picker value={selectedSubreddit} onChange={this.change} options={['reactjs','frontend']}/>
@@ -100,4 +102,7 @@ function mapStateToProps(state) {
         lastUpdated
     }
 }
-export default connect(mapStateToProps)(AsycApp);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AsycApp);

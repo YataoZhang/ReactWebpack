@@ -50,6 +50,9 @@ function shouldFetchPosts(state, subreddit) {
     }
     return posts.didInvalidate;
 }
+/**
+ * 异步action creator,需要返回一个函数,并且这个函数必须返回promise对象
+ */
 export function fetchPostsIfNeeded(subreddit) {
     return (dispatch, getState)=> {
         if (shouldFetchPosts(getState(), subreddit)) {
