@@ -2,12 +2,9 @@
  * Created by zhangyatao on 2016/12/23.
  */
 import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as Actions from '../actions';
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
-class AsycApp extends Component {
+export default class App extends Component {
     static propTypes = {
         selectedSubreddit: PropTypes.string.isRequired,
         posts: PropTypes.array.isRequired,
@@ -83,25 +80,3 @@ class AsycApp extends Component {
         )
     }
 }
-function mapStateToProps(state) {
-    console.log('[mapStateToProps] state:  ', state);
-    const {selectedSubreddit, postsBySubreddit}=state;
-    const {
-        isFetching,
-        lastUpdated,
-        items:posts
-    } = postsBySubreddit[selectedSubreddit] || {
-        isFetching: true,
-        items: []
-    };
-    return {
-        selectedSubreddit,
-        posts,
-        isFetching,
-        lastUpdated
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(Actions, dispatch);
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AsycApp);
