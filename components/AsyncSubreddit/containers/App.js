@@ -4,7 +4,6 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-// import {selectSubreddit, invalidateSubreddit, fetchPostsIfNeeded} from '../actions';
 import * as Actions from '../actions';
 import Picker from '../components/Picker';
 import Posts from '../components/Posts';
